@@ -1,132 +1,59 @@
-# Swift-Queue
-Live doctor queues, advance booking, QR queue passes and admin-verified doctors. A Laravel + MySQL healthcare queue management platform.
-# SwiftQueue
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-Smart healthcare queue and appointment management for doctors and patients, built with Laravel and MySQL.
+<p align="center">
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
-Patients join a doctor's live queue or book an advance slot, follow their turn in real time, and arrive when it counts. Doctors manage their own schedule and queue, and admins verify doctors before they go live.
+## About Laravel
 
-## Features
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-**Available now**
-- Role-based authentication for patients, doctors and admins
-- Separate patient and doctor registration, with the user and profile created in one transaction
-- Admin dashboard with doctor verification (approve and revoke)
-- Server-side role protection on every route
-- Dark, responsive UI built on a custom design system
-- Specialty categories seeded for doctor registration
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-**Planned**
-- Doctor clinic profile with Google Maps location, average service time and queue limit
-- Doctor-defined available days and time slots
-- Live queue with wait-time estimates
-- Advance appointment booking
-- 40% prepayment with a payment verification workflow
-- QR queue pass
-- Notifications and patient reviews
-- Automated tests
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Tech Stack
+## Learning Laravel
 
-| Layer | Technology |
-| --- | --- |
-| Backend | PHP 8.2, Laravel 12 |
-| Database | MySQL |
-| Frontend | Blade, Tailwind CSS, Alpine.js |
-| Tooling | Vite, Laravel Breeze, Composer, npm |
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
 
-## Requirements
+If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-- PHP 8.2 or higher
-- Composer
-- Node.js and npm
-- MySQL (XAMPP works well on Windows)
+## Laravel Sponsors
 
-## Installation
+We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-```bash
-git clone https://github.com/arhambutt7890/swiftqueue.git
-cd swiftqueue
+### Premium Partners
 
-composer install
-npm install
+- **[Vehikl](https://vehikl.com)**
+- **[Tighten Co.](https://tighten.co)**
+- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+- **[64 Robots](https://64robots.com)**
+- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
+- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
+- **[Redberry](https://redberry.international/laravel-development)**
+- **[Active Logic](https://activelogic.com)**
 
-cp .env.example .env
-php artisan key:generate
-```
+## Contributing
 
-Create an empty MySQL database named `swiftqueue`, then set these values in `.env`:
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-```env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=swiftqueue
-DB_USERNAME=root
-DB_PASSWORD=
+## Code of Conduct
 
-ADMIN_NAME="SwiftQueue Admin"
-ADMIN_EMAIL=admin@example.com
-ADMIN_PASSWORD="choose-a-strong-password"
-```
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-Run the migrations and seeders:
+## Security Vulnerabilities
 
-```bash
-php artisan migrate --seed
-```
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-This creates the tables, the specialty categories and the admin account from `.env`.
+## License
 
-## Running Locally
-
-Use two terminals:
-
-```bash
-php artisan serve
-npm run dev
-```
-
-Then open `http://127.0.0.1:8000`.
-
-## User Roles
-
-| Role | How it is created | Access |
-| --- | --- | --- |
-| Patient | Public registration | Patient dashboard |
-| Doctor | Public registration, unverified until approved by an admin | Doctor dashboard |
-| Admin | Seeded from `.env` only, never through registration | Admin dashboard and doctor verification |
-
-## Project Structure
-
-```
-app/
-  Enums/UserRole.php            Role definitions
-  Http/Controllers/             Auth, Admin, Doctor and Patient controllers
-  Http/Middleware/              EnsureUserHasRole
-  Http/Requests/Auth/           Registration validation
-  Models/                       User, Doctor, Patient, Category
-  Services/                     Business logic (registration, doctor verification)
-database/
-  migrations/
-  seeders/                      Categories and admin account
-resources/
-  css/app.css                   Design system
-  views/                        Blade views and UI components
-routes/web.php
-```
-
-## Security Notes
-
-- `role` is not mass-assignable and is never read from request input
-- Doctor verification, ratings and review counts can only be changed by server-side services
-- Admin credentials come from `.env` and are never committed
-- Registration and verification run inside database transactions
-
-## Roadmap
-
-Development follows a phased plan. The next phase is the doctor clinic profile, followed by availability scheduling, the live queue engine, booking, payments and notifications.
-
-## Author
-
-Built by Muhammad Arham Butt.
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
